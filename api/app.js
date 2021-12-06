@@ -109,6 +109,7 @@ app.use("/api/patient-illness", API.patientIllnessRouter);
 app.use("/api/illness", API.illnessRouter);
 app.use("/api/patient-company", API.patientCompanyRouter);
 app.use("/api/company", API.companiesRouter);
+app.use("/api/healthParams", API.healthParamsRouter);
 
 app.use('/api/results', API.BlRouter);
 

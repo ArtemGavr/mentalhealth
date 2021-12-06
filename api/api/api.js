@@ -6,6 +6,7 @@ const patientIllnessRouter = require('./patient-illness/patient-illness');
 const patientCompanyRouter = require('./patient-company/patient-company');
 const illnessRouter = require('./illness/illness');
 const companiesRouter = require('./company/company');
+const healthParamsRouter = require('./healthParams/healthParams');
 
 
 const BlRouter = require("./bl/bl")
@@ -19,6 +20,7 @@ module.exports = {
  moodsRouter,
  BlRouter,
  patientCompanyRouter,
- companiesRouter
+ companiesRouter,
+ healthParamsRouter
 };
 

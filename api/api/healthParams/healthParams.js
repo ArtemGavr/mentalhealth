@@ -1,8 +1,6 @@
 const router = require("express").Router();
-const PatientBodies = require("../../models/bodies");
-const { createBodySchema } = require("../../validations/body");
+const PatientParams = require("../../models/healthParams");
 
-const { validation } = require("../../middlewares/validation_joi");
 const { permit } = require("../../middlewares/permition_roles");
 //routes
 router.get("/last", permit(["user"]), getLast);
@@ -11,13 +9,13 @@ router.post("/", permit(["user"]), create);
 router.delete("/:id", permit(["user"]), del);
 
 /**
- * Get bodies
+ * Get params
  */
 async function read(req, res) {
   try {
     const foundPatient = req.patient;
-    const bodies = foundPatient.bodies;
-    res.json(bodies);
+    const params = foundPatient.healthParams;
+    res.json(params);
   } catch (error) {
     res.status(404).json({
       message: "Patient is not found",
@@ -30,29 +28,29 @@ async function read(req, res) {
  */
 async function getLast(req, res) {
   const foundPatient = req.patient ;
-  const bodies = foundPatient.bodies;
-  if (bodies.length == 0) {
+  const params = foundPatient.healthParams;
+  if (params.length == 0) {
     return res.status(500).json("this Patient has no parameters yet");
   } else {
-    lastBodies = bodies[bodies.length - 1];
-    return res.json(lastBodies);
+    lastParams = params[params.length - 1];
+    return res.json(lastParams);
   }
 }
 
 /**
- * create patient bodies
+ * create patient params
  */
 async function create(req, res) {
   try {
-    let newBodies = {};
-    const { weight, height, sex } = req.body;
-    newBodies = { weight, height, sex };
-    newBodies.patient = req.patient.id;
-    validation(createBodySchema);
+    let newParams = {};
+    const { hr, temp } = req.body;
+    newParams = { hr, temp };
+    newParams.patient = req.patient.id;
+
     let foundPatient = req.patient;
-    foundPatient.bodies.push(newBodies);
+    foundPatient.healthParams.push(newParams);
     await foundPatient.save();
-    res.json(PatientBodies.format(newBodies));
+    res.json(PatientParams.format(newParams));
   } catch (error) {
     res.status(500).json({
       message: "An error occured",
@@ -61,16 +59,16 @@ async function create(req, res) {
 }
 
 /**
- * Delete body bodies
+ * Delete parmas
  */
 async function del(req, res) {
   try {
-    bodiesId = req.bodies.id;
+    paramsId = req.healthParams.id;
     const patient = req.patient;
-    let removedoc = patient.bodies.find(body => {
-      return body.id == bodiesId;
+    let removedoc = patient.healthParams.find(params => {
+      return params.id == paramsId;
     });
-    patient.bodies.remove(removedoc);
+    patient.healthParams.remove(removedoc);
     if (removedoc == undefined) {
       return res.status(500).json({
         message: "Document doesn't exist",

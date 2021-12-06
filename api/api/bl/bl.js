@@ -1,215 +1,167 @@
 const router = require("express").Router();
 const Patient = require("../../models/patient");
-const { permit } = require("../../middlewares/permition_roles");
+const {permit} = require("../../middlewares/permition_roles");
 const illness = require("../../models/illness");
 
 router.get("/", permit(["user"]), bl);
+
 /**
  * Get bodies
  */
- async function bl(req, res) {
-    try {
-      const foundUser = req.user;
-      const params = foundUser.params;
-      const lastParams = params[params.length-1];
-      const { weight, height, activity} = lastParams;
+async function bl(req, res) {
+  try {
+    const foundPatient = req.patient;
 
-      const calculatedWeight = (height -100) - ((height-150)/2);
+    let message = " ";
+    let weightIsOk;
+    {
+      const params = foundPatient.bodies;
+      const lastParams = params[params.length - 1];
+      const {weight, height} = lastParams;
 
-      let weightIsOk = 0;
-      if(calculatedWeight<= weight+5 && calculatedWeight >= weight-5){
+      const calculatedWeight = (height - 100) - ((height - 150) / 2);
+
+      weightIsOk = 0;
+      if (calculatedWeight <= weight + 5 && calculatedWeight >= weight - 5) {
         weightIsOk = 1;
+        message += "Your weight is fine. "
+      } else {
+        weightIsOk = 0;
+        message += "Your weight needs proper attention. "
       }
-      let health = 0;
-      if(weightIsOk === 1 && (activity === 2 || activity === 3)){
-        health = 1;
-      }
-      const covid =  await illness.find({title:"COVID-19"});
-
-      const lastCovid = covid[covid.length-1];
-      const {_id} = lastCovid;
-
-      const userCovid = foundUser.illness.find(ill => {
-
-    ill._id === _id
-    return ill}
-    )
-
-      if (health ===1){
-        const stage = userCovid.stage;
-
-        const userAnalyzes = foundUser.userAnalyzes;
-        if (userAnalyzes.length == 0) {
-          return res.status(500).json("this user has no diaries yet");
-        }
-        const lastAnalyzes = userAnalyzes[userAnalyzes.length - 1];
-        const { heartRate, saturation, temp } = lastAnalyzes;
-        let heartRateIndex = 1;
-        if(heartRate > 85 || heartRate < 65){
-            heartRateIndex = 0;
-        }
-        let saturationIndex =1;
-        if(saturation< 95){
-            saturationIndex = 0;
-        }
-        let tempIndex =1;
-        if(temp > 37.5){
-            tempIndex = 0;
-        }
-    const indexSum = heartRateIndex + saturationIndex + tempIndex;
-    if(indexSum == 3){
-        return res.json({
-            heartRate,
-            saturation,
-            temp,
-            message:"Everything looks good"
-        })
-    }else if(indexSum == 2){
-        if(heartRateIndex === 0){
-            return res.json({
-                heartRate,
-                saturation,
-                temp,
-                message:"Please keep checkin your heart rate"
-            })
-        }else if(saturationIndex===0){
-            return res.json({
-                heartRate,
-                saturation,
-                temp,
-                message:"Please keep checkin your saturation rate"
-            })
-        }else if(tempIndex === 0){
-                return res.json({
-                    heartRate,
-                    saturation,
-                    temp,
-                    message:"Please keep checkin your temperature rate"
-                })
-        }
-
-    }else{
-        return res.json({
-            heartRate,
-            saturation,
-            temp,
-            message:"Please get additional tests (blood, moods)"
-        })
     }
-      }else{
-        const stage = userCovid.stage;
 
-         const userAnalyzes = foundUser.userAnalyzes;
-         if (userAnalyzes.length == 0) {
-           return res.status(500).json("this user has no diaries yet");
-         }
-         const lastAnalyzes = userAnalyzes[userAnalyzes.length - 1];
+    let severity_p = 0;
+    {
+      const anxiety = await illness.find({name: "Anxiety"});
 
-         const { heartRate, saturation, temp } = lastAnalyzes;
-         const bloodArr = lastAnalyzes.blood;
-         const lastBlood = bloodArr[bloodArr.length-1]
-         const {eryth,
-            hemo,
-            leuko,
-            trombo,
-            bezof,
-            ezino,
-            limfo,
-            mono } = lastBlood;
+      const lastAnxiety = anxiety[anxiety.length - 1];
+      const {_id, severity} = lastAnxiety;
 
-    const  erythInd = (eryth< 3.8) ? 0:
-            (eryth>5) ? 0:
-            1;
-    const hemoInd = (hemo < 120) ? 0:
-            (hemo>160) ? 0:
-            1;
-     const  leukoInd = (leuko<4) ? 0:
-            (leuko > 9)? 0:
-            1;
-    const tromboInd=(trombo < 170) ? 0:
-            (trombo > 320) ? 0:
-            1;
-    const bezofInd = (bezof<0) ? 0:
-            (bezof>1) ? 0:
-            1;
-    const linfoInd = (limfo<18)? 0:
-            (limfo>40)? 0:
-            1;
-    const monoInd = (mono<3) ? 0:
-            (mono>11) ? 0:
-            1;
-    const ezinoId = (ezino<0.5)? 0:
-            (ezino>5)? 0:
-            1;
+      severity_p = severity;
+    }
 
-    const bloodSum = erythInd + leukoInd + tromboInd + bezofInd + linfoInd + monoInd + hemoInd + ezinoId;
-    const bloodCofecent = bloodSum * 0.3
-    const passed = (bloodCofecent < 0.9 ) ? false:
-    true;
-    const mentalArr = lastAnalyzes.mentalTest;
-    const lastMentalTest = mentalArr[mentalArr.length-1];
-    const  { stressRate,
-        anexityRate,
-        indeffRate,
-        lonelRate } = lastMentalTest;
-       let stressRateInd = 1;
-       let anexityRateInd = 1;
-       let indeffRateInd =1;
-      let lonelRateInd =1;
 
-    if(stressRate> 5){
+    let hr_p, temp_p;
+    {
+      const patientHealthParams = foundPatient.healthParams;
+      if (patientHealthParams.length == 0) {
+        return res.status(500).json("this user has no params yet");
+      }
+
+      const lastHealthParams = patientHealthParams[patientHealthParams.length - 1];
+       const {hr, temp} = lastHealthParams;
+       hr_p= hr;
+       temp_p = temp;
+      let heartRateIndex = 1;
+      if (hr > 85 || hr < 65) {
+        heartRateIndex = 0;
+      }
+
+      let tempIndex = 1;
+      if (temp > 37.5) {
+        tempIndex = 0;
+      }
+      const indexSum = heartRateIndex + tempIndex;
+      if (indexSum == 2) {
+        message += "Heart and temperature is good. "
+      } else if (indexSum == 1) {
+        if (heartRateIndex === 0) {
+          message += "Please keep checkin your heart rate. "
+        } else if (tempIndex === 0) {
+          message += "Please keep checkin your temperature rate. "
+        }
+      } else {
+        message += "Please get additional tests. "
+      }
+    }
+
+
+    let stress_p,
+        anxiety_p,
+        depression_p,
+        general_p,
+        happiness_p,
+        mentalInstruction
+
+    {
+      const patientDiaries = foundPatient.patientDiaries;
+      if (patientDiaries.length == 0) {
+        return res.status(500).json("this user has no diaries yet");
+      }
+      const lasrDiaries = patientDiaries[patientDiaries.length - 1];
+
+      const moodsArr = lasrDiaries.moods;
+      const lastMood = moodsArr[moodsArr.length - 1]
+      const {
+        stress,
+        anxiety,
+        depression,
+        general,
+        happiness
+      } = lastMood;
+
+      stress_p = stress
+      anxiety_p = anxiety
+      depression_p = depression
+      general_p = general
+      happiness_p = happiness
+
+      let stressRateInd = 1;
+      let anxietyRateInd = 1;
+      let deppRateInd = 1;
+      let generalRateInd = 1;
+      let happinessRateInd = 1;
+      if (stress > 5) {
         stressRateInd = 0;
-    }
-    if(anexityRate > 4){
-        anexityRateInd = 0;
-    }
-    if(indeffRate>5){
-        indeffRateInd = 0;
-    }
-    if(lonelRate > 4){
-        lonelRateInd = 0;
-    }
-    const mentalSum = stressRateInd + anexityRateInd + indeffRateInd + lonelRateInd;
-    let mentalInstruction = false;
-    if (mentalSum < 3){
-         mentalInstruction = true;
+      }
+      if (anxiety > 4) {
+        anxietyRateInd = 0;
+      }
+      if (depression > 5) {
+        deppRateInd = 0;
+      }
+      if (general > 4) {
+        generalRateInd = 0;
+      }
+      if (happiness < 2) {
+        happinessRateInd = 0;
+      }
+
+      const mentalSum = stressRateInd + anxietyRateInd + deppRateInd + generalRateInd + happinessRateInd;
+      mentalInstruction = false;
+      if (mentalSum < 3) {
+        mentalInstruction = true;
+        message += "Please seek mental help. "
+      } else {
+        message += "Your mental health is fine. "
+      }
     }
 
 
     return res.json({
-        heartRate,
-        saturation,
-        temp,
-        passed,
-        eryth,
-            hemo,
-            leuko,
-            trombo,
-            bezof,
-            ezino,
-            limfo,
-            mono,
-        bloodCofecent,
-        stressRate,
-        anexityRate,
-        indeffRate,
-        lonelRate,
-        mentalInstruction,
-        stage
-
+      hr_p,
+      temp_p,
+      weightIsOk,
+      stress_p,
+      anxiety_p,
+      depression_p,
+      general_p,
+      happiness_p,
+      mentalInstruction,
+      severity,
+      message: message
     })
 
- }
-
-    } catch (error) {
-        console.log(error)
-      res.status(404).json({
-          error,
-        message: "User is not found",
-      });
-    }
+  } catch (error) {
+    console.log(error)
+    res.status(404).json({
+      error,
+      message: "Patient is not found",
+    });
   }
+}
 
-  //export
+//export
 module.exports = router;
 

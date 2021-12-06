@@ -110,6 +110,16 @@
  *           type: email
  *         password:
  *           type: string
+ *     HealthParams:
+ *       type: object
+ *       required:
+ *         - hr
+ *         - temp
+ *       properties:
+ *         hr:
+ *           type: number
+ *         temp:
+ *           type: number
  */
 
 /**
@@ -133,6 +143,8 @@
  *   description: Patient-Company
  *   name: Results
  *   description: Calculated results
+ *   name: HealthParams
+ *   description: health status
  */
 
 
@@ -238,7 +250,6 @@
  *                 $ref: '#/components/schemas/Illness'
  */
 
-
 /**
  * @swagger
  * /api/bodies/last:
@@ -272,7 +283,7 @@
  *     responses:
  *       200:
  *         description: The patient description by id
- *         contens:
+ *         contents:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Patient'
@@ -296,7 +307,7 @@
  *     responses:
  *       200:
  *         description: The illness description by id
- *         contens:
+ *         contents:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Illness'
@@ -422,7 +433,7 @@
  *       500:
  *         description: Some server error
  */
-
+/
 /**
  * @swagger
  * /api/bodies:
@@ -646,7 +657,7 @@
  *     responses:
  *       200:
  *         description: The patient description
- *         contens:
+ *         contents:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Patient'
@@ -758,7 +769,7 @@
  *     responses:
  *       200:
  *         description: The company description by id
- *         contens:
+ *         contents:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Company'
@@ -837,4 +848,83 @@
  *         description: The company was deleted
  *       404:
  *         description: The company was not found
+ */
+
+
+/**
+ * @swagger
+ * /api/healthParams:
+ *   get:
+ *     summary: Returns the list of all the patient parameters
+ *     tags: [Bodies]
+ *     responses:
+ *       200:
+ *         description: The list of the patient parameters
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Bodies'
+ */
+
+/**
+ * @swagger
+ * /api/healthParams/last:
+ *   get:
+ *     summary: Returns the last healthParams
+ *     tags: [HealthParams]
+ *     responses:
+ *       200:
+ *         description: The last healthParams
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/HealthParams'
+ */
+
+/**
+ * @swagger
+ * /api/healthParams:
+ *   post:
+ *     summary: Create a new patient healthParams
+ *     tags: [HealthParams]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/HealthParams'
+ *     responses:
+ *       200:
+ *         description: The patient healthParams was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/HealthParams'
+ *       500:
+ *         description: Some server error
+ */
+
+/**
+ * @swagger
+ * /api/healthParams/{id}:
+ *   delete:
+ *     summary: Remove the patient healthParams by id
+ *     tags: [HealthParams]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The healthParams id
+ *
+ *     responses:
+ *       200:
+ *         description: The patient healthParams were deleted
+ *       404:
+ *         description: The patient was not found
  */

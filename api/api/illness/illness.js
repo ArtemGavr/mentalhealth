@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 router.get("/", permit(["user"]), list);
 router.get("/search/", permit(["user"]), search);
 router.get("/:id", permit(["admin"]), read);
-router.post("/", permit(["admin"]), create);
+router.post("/", permit(["admin", "user"]), create);
 router.put("/:id", permit(["admin"]), update);
 router.delete("/:id", permit(["admin"]), del);
 
@@ -74,10 +74,10 @@ async function read(req, res) {
  */
 async function create(req, res) {
   try {
-    const { title, severity} = req.body;
+    const { name, severity} = req.body;
 
     let newIllness = await new Illness({
-      title,
+      name,
       severity,
     });
     await newIllness.save();

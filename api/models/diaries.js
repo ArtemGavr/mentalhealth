@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const DiariesSchema = new mongoose.Schema(
   {
-    user: {
+    patient: {
       type: Schema.Types.ObjectId,
       ref: "Patient",
       required: true,

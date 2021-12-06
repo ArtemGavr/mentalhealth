@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 const BodiesSchema = new mongoose.Schema(
   {
-    user: {
+    patient: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Patient",
       required: true,
     },
     weight: {

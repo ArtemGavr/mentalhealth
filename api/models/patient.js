@@ -3,6 +3,7 @@ const BodiesSchema = require("./bodies").schema;
 const PatientDiariesSchema = require("./diaries").schema;
 const PatientIllnessSchema = require("./patient-illness").schema;
 const PatientCompanySchema = require("./patient-company").schema;
+const HealthParamsSchema = require("./healthParams").schema;
 const dayjs = require("dayjs");
 
 const PatientSchema = new mongoose.Schema(
@@ -40,6 +41,7 @@ const PatientSchema = new mongoose.Schema(
       patientCompany: [PatientCompanySchema],
       illness: [PatientIllnessSchema],
       patientDiaries: [PatientDiariesSchema],
+      healthParams: [HealthParamsSchema],
     },
     {timestamps: true}
 );
@@ -56,6 +58,7 @@ PatientSchema.statics.format = patient => {
     illness: patient.illness,
     patientCompany: patient.patientCompany,
     patientDiaries: patient.patientDiaries,
+    healthParams: patient.healthParams,
   };
 };
 

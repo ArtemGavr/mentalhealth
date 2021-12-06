@@ -6,15 +6,15 @@ router.post("/:id", permit(["user"]), create);
 
 
 /**
- * create user bodies
+ * create patient moods
  */
 async function create(req, res) {
 
   try {
-    const user = req.user;
-    let patientDiariesID = req.patientDiaries.id;
-    let foundDiaries = await user.patientDiaries.find(patientDiaries => {
-      return patientDiariesID._id == patientDiariesID;
+    const patient = req.patient;
+    let patientDiariesID = req.params.id;
+    let foundDiaries = await patient.patientDiaries.find(patientDiariespp => {
+      return patientDiariespp._id == patientDiariesID;
     });
     let diaries = foundDiaries._id;
     let newMoods = {};
@@ -34,7 +34,7 @@ async function create(req, res) {
       diaries
     };
     foundDiaries.moods.push(newMoods);
-    await user.save();
+    await patient.save();
     res.json(foundDiaries);
   } catch (error) {
     res.status(500).json({
