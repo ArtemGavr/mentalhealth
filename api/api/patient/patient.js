@@ -10,7 +10,7 @@ const passport = require("passport");
 
 //routes
 router.get("/", list);
-router.get("/me",  permit(["user"]), me);
+router.get("/me",  permit(["patient"]), me);
 
 router.get("/:id", read);
 

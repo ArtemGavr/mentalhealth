@@ -2,10 +2,10 @@ const router = require("express").Router();
 const PatientAnalyzes = require("../../models/diaries");
 const { permit } = require("../../middlewares/permition_roles");
 //routes
-router.get("/last", permit(["user"]), getLast);
-router.get("/", permit(["user"]), read);
-router.post("/", permit(["user"]), create);
-router.delete("/:id", permit(["user"]), del);
+router.get("/last", permit(["patient"]), getLast);
+router.get("/", permit(["patient"]), read);
+router.post("/", permit(["patient"]), create);
+router.delete("/:id", permit(["patient"]), del);
 
 /**
  * Get diaries

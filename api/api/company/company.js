@@ -5,8 +5,8 @@ const { permit } = require("../../middlewares/permition_roles");
 const mongoose = require("mongoose");
 //routes
 
-router.get("/", permit(["user"]), list);
-router.get("/search/", permit(["user"]), search);
+router.get("/", permit(["patient"]), list);
+router.get("/search/", permit(["patient"]), search);
 router.get("/:id", permit(["admin"]), read);
 router.post("/", permit(["admin"]), create);
 router.put("/:id", permit(["admin"]), update);
@@ -64,7 +64,7 @@ async function read(req, res) {
     res.json(Company.format(foundCompany));
   } catch (error) {
     res.status(404).json({
-      message: "User is not found",
+      message: "Patient is not found",
     });
   }
 }

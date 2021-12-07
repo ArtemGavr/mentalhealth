@@ -2,10 +2,10 @@ const router = require("express").Router();
 const { permit } = require("../../middlewares/permition_roles");
 
 //routes
-// router.get("/find", permit(["user"]), find);
-router.get("/", permit(["user"]), read);
-router.post("/", permit(["user"]), create);
-router.delete("/:id", permit(["user"]), del);
+// router.get("/find", permit(["patient"]), find);
+router.get("/", permit(["patient"]), read);
+router.post("/", permit(["patient"]), create);
+router.delete("/:id", permit(["patient"]), del);
 
 /**
  * Get patientCompany
@@ -17,7 +17,7 @@ async function read(req, res) {
     res.json(patientCompany);
   } catch (error) {
     res.status(404).json({
-      message: "User is not found",
+      message: "Patient is not found",
     });
   }
 }

@@ -3,7 +3,7 @@ const Patient = require("../../models/patient");
 const {permit} = require("../../middlewares/permition_roles");
 const illness = require("../../models/illness");
 
-router.get("/", permit(["user"]), bl);
+router.get("/", permit(["patient"]), bl);
 
 /**
  * Get bodies
@@ -46,7 +46,7 @@ async function bl(req, res) {
     {
       const patientHealthParams = foundPatient.healthParams;
       if (patientHealthParams.length == 0) {
-        return res.status(500).json("this user has no params yet");
+        return res.status(500).json("this patient has no params yet");
       }
 
       const lastHealthParams = patientHealthParams[patientHealthParams.length - 1];
@@ -87,7 +87,7 @@ async function bl(req, res) {
     {
       const patientDiaries = foundPatient.patientDiaries;
       if (patientDiaries.length == 0) {
-        return res.status(500).json("this user has no diaries yet");
+        return res.status(500).json("this patient has no diaries yet");
       }
       const lasrDiaries = patientDiaries[patientDiaries.length - 1];
 
@@ -149,7 +149,7 @@ async function bl(req, res) {
       general_p,
       happiness_p,
       mentalInstruction,
-      severity,
+      severity_p,
       message: message
     })
 

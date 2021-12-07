@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { permit } = require("../../middlewares/permition_roles");
 //routes
 
-router.post("/:id", permit(["user"]), create);
+router.post("/:id", permit(["patient"]), create);
 
 
 /**

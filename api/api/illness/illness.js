@@ -5,10 +5,10 @@ const { permit } = require("../../middlewares/permition_roles");
 const mongoose = require("mongoose");
 //routes
 
-router.get("/", permit(["user"]), list);
-router.get("/search/", permit(["user"]), search);
+router.get("/", permit(["patient"]), list);
+router.get("/search/", permit(["patient"]), search);
 router.get("/:id", permit(["admin"]), read);
-router.post("/", permit(["admin", "user"]), create);
+router.post("/", permit(["admin", "patient"]), create);
 router.put("/:id", permit(["admin"]), update);
 router.delete("/:id", permit(["admin"]), del);
 
@@ -64,7 +64,7 @@ async function read(req, res) {
     res.json(Illness.format(foundIllness));
   } catch (error) {
     res.status(404).json({
-      message: "User is not found",
+      message: "Patient is not found",
     });
   }
 }

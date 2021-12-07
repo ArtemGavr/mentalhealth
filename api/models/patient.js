@@ -32,7 +32,7 @@ const PatientSchema = new mongoose.Schema(
       },
       roles: {
         type: Array,
-        default: ["user"],
+        default: ["patient"],
       },
       birthDate: {
         type: { type: Date}

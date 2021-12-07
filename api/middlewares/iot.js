@@ -1,5 +1,5 @@
-const getResults = (id) => {
-    const res = await analysisRepository.GetById(id);
+const getResults = async (id) => {
+    const res = await healthParamsRepository.GetById(id);
     if (res == null){
         return  null;
     }
