@@ -10,6 +10,11 @@ const PatientCompanySchema = new mongoose.Schema({
     ref: "Company",
     required: true,
   },
+  patientId: {
+    type: Schema.Types.ObjectId,
+    ref: "Patient",
+    required: true,
+  },
   startDate: { type: Date, default: today },
 });
 

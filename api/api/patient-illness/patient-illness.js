@@ -27,7 +27,7 @@ async function read(req, res) {
 async function create(req, res) {
   try {
     const illnessId = req.body.illnessId;
-    const severity = req.body.stage;
+    const severity = req.body.severity;
     const foundPatient = req.patient;
     foundPatient.illness.push({illnessId, severity});
     await foundPatient.save();

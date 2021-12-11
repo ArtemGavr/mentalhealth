@@ -75,7 +75,7 @@
  *           type: number
  *         sex:
  *           type: number
- *     Companies:
+ *     Company:
  *       type: object
  *       required:
  *         - name
@@ -137,8 +137,8 @@
  *   description: The body parameters
  *   name: Patient-Illness
  *   description: Patient illnesses
- *   name: Companies
- *   description: The companies managing API
+ *   name: Company
+ *   description: The company managing API
  *   name: Patient-Company
  *   description: Patient-Company
  *   name: Results
@@ -699,7 +699,10 @@
  *       404:
  *         description: The patient company was not found
  */
+
+
 /**
+ *
  * @swagger
  * /api/patient-company:
  *   get:
@@ -713,7 +716,7 @@
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Companies'
+ *                 $ref: '#/components/schemas/Company'
  */
 /**
  * @swagger
@@ -753,6 +756,7 @@
  *               items:
  *                 $ref: '#/components/schemas/Company'
  */
+
 /**
  * @swagger
  * /api/company/{id}:
@@ -776,6 +780,7 @@
  *       404:
  *         description: The company was not found
  */
+
 /**
  * @swagger
  * /api/company:
@@ -798,6 +803,8 @@
  *       500:
  *         description: Some server error
  */
+
+
 /**
  * @swagger
  * /api/company/{id}:

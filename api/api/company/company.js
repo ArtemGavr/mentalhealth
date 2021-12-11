@@ -1,6 +1,8 @@
 //require
 const router = require("express").Router();
 const Company= require("../../models/companies");
+const PatientCompany= require("../../models/patient-company");
+const Patient = require("../../models/patient");
 const { permit } = require("../../middlewares/permition_roles");
 const mongoose = require("mongoose");
 //routes
@@ -8,6 +10,7 @@ const mongoose = require("mongoose");
 router.get("/", permit(["patient"]), list);
 router.get("/search/", permit(["patient"]), search);
 router.get("/:id", permit(["admin"]), read);
+router.get("/workers/:id", permit(["admin"]), workers);
 router.post("/", permit(["admin"]), create);
 router.put("/:id", permit(["admin"]), update);
 router.delete("/:id", permit(["admin"]), del);
@@ -23,6 +26,34 @@ async function list(req, res) {
     const illness = await Company.find()
       .limit(limit * 1)
       .skip((page - 1) * limit);
+    const total = await Company.estimatedDocumentCount();
+    const pages = Math.round(total / limit);
+    res.json({
+      total,
+      pages,
+      currentPage: page,
+      perPage: limit,
+      illness,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "An error occured",
+    });
+  }
+}
+
+/**
+ * List of Company with pagination
+ */
+async function workers(req, res) {
+  try {
+    const { page = 1, limit = 5 } = req.query;
+    const compID = req.params.id
+    const ff = await Patient.find({"patientCompany":{companyId: compID}})
+
+    const illness = await Company.find()
+        .limit(limit * 1)
+        .skip((page - 1) * limit);
     const total = await Company.estimatedDocumentCount();
     const pages = Math.round(total / limit);
     res.json({
@@ -64,7 +95,7 @@ async function read(req, res) {
     res.json(Company.format(foundCompany));
   } catch (error) {
     res.status(404).json({
-      message: "Patient is not found",
+      message: "Company is not found",
     });
   }
 }
