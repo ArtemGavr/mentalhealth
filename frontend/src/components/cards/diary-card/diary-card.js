@@ -18,7 +18,7 @@ const Diary = () => {
   const handleClose = () => setOpen(false);
   const { t } = useTranslation();
   const messageErr = t("An error occured, please reload this page");
-  const { status, data } = useQuery("notes", getUserNotes, {
+  const { status, data } = useQuery("notes22", getUserNotes, {
     onError: () => {
       notify("error", messageErr);
     },

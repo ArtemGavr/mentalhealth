@@ -12,7 +12,7 @@ import { useQuery } from "react-query";
 import { useTranslation } from "react-i18next";
 import { Grid, Card, CircularProgress } from "@material-ui/core";
 import { useStyles} from "./statistic.styles"
-import { getUserParams } from "../../../api/body-params";
+import {getUserBodyParams, getUserParams} from "../../../api/body-params";
 import toast from "../../toast";
 
 const Statistic = () => {
@@ -21,7 +21,7 @@ const Statistic = () => {
   const notify = React.useCallback((type, message) => {
     toast({ type, message });
   }, []);
-  const { status, data } = useQuery("allParams", getUserParams, {
+  const { status, data } = useQuery("allHealthParams", getUserBodyParams, {
     onError: () => {
       notify("error", "An error occured, please reload this page!");
     },
@@ -47,11 +47,11 @@ const Statistic = () => {
         <Legend />
         <Line
           type="monotone"
-          dataKey="weight"
+          dataKey="hr"
           stroke="#8884d8"
           activeDot={{ r: 8 }}
         />
-        <Line type="monotone" dataKey="height" stroke="#82ca9d" />
+        <Line type="monotone" dataKey="temp" stroke="#82ca9d" />
       </LineChart>
       </Card>
       )

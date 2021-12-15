@@ -56,7 +56,7 @@ const ModalAddNote = ({open, handleClose}) => {
             placeholder={t("Type your note")}
             type="text"
         />
-        {formik.errors.commentText && formik.touched.commentText ? <div>{formik.errors.commentText}</div> : null}
+        {formik.errors.note && formik.touched.note ? <div>{formik.errors.note}</div> : null}
         </Grid>
         <Button className={classes.button} type="submit" variant="contained" color="primary">
         {t("Add")}

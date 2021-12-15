@@ -35,7 +35,7 @@ const theme = createTheme({
         fontSize: [30, "!important"],
     }
   },
- 
+
 });
 
 export default theme;

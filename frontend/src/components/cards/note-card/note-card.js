@@ -10,20 +10,17 @@ const NoteCard = (note) => {
   const { t } = useTranslation();
   let title;
   console.log(note.note.note)
-  var gmtDateTime = moment.utc(note.note.createdAt);
+  var gmtDateTime = moment.utc(note.note.tim);
   var local = gmtDateTime.format('YYYY MMM DD | HH:mm');
-  //if (illness.illness.ilnessId === "61802ac813cc0dae9bb3ba91"){
-  //  title = "COVID"
- // }
- // console.log(title)
+
  console.log(local)
 
 
   return (
-      
+
       <Grid className={classes.paper} container direction="row" alignItems="center">
       <CardHeader
-         
+
           title={t("Daily note")}
           subheader=
               {  local}
@@ -34,7 +31,7 @@ const NoteCard = (note) => {
         </Typography>
         </Grid>
         </Grid>
-       
+
   );
 };
 

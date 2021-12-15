@@ -2,7 +2,7 @@ import axios from "../utils/axios";
 
 export const getUserNotes = async () => {
     try {
-      const response = await axios.get("/api/notes");
+      const response = await axios.get("/api/diaries");
       return response.data;
     } catch (error) {
       console.error(error);
@@ -12,10 +12,20 @@ export const getUserNotes = async () => {
 
   export const addUserNote = async data => {
     try {
-      const response = await axios.post("/api/notes", data);
+      const response = await axios.post("/api/diaries", data);
       return response.data;
     } catch (error) {
       console.error(error.response.data);
       return error.response.data;
     }
   };
+
+export const getUserDiariesLast = async data => {
+  try {
+    const response = await axios.get("/api/diaries/last", data);
+    return response.data;
+  } catch (error) {
+    console.error(error.response.data);
+    return error.response.data;
+  }
+};

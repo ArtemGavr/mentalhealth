@@ -20,9 +20,9 @@ import {
 import { deleteIllness, getIllness } from "../../../api/illness";
 import { ContactSupportOutlined } from "@material-ui/icons";
 import AddIllnessModal from "../../forms/add-illness/add-illness";
-  
+
   const columns = foodGrid;
-  
+
   const AdminDashboard = () => {
 
     const classes = useStyles();
@@ -31,13 +31,13 @@ import AddIllnessModal from "../../forms/add-illness/add-illness";
     const [open, setOpen] = useState(false);
     const [illness, setIllness] = useState([]);
     const [open2, setOpen2] = useState(false);
-  
+
   //  const currentPage = router.query?.page || 1;
-  
+
     const notify = React.useCallback((type, message) => {
       toast({ type, message });
     }, []);
-  
+
     const handleClose = () => {
       setOpen(!open);
     };
@@ -50,7 +50,7 @@ import AddIllnessModal from "../../forms/add-illness/add-illness";
       const messageErr = t("An error occured, please reload this page");
       const messageSuc = t("Item was successfully deleted!")
       const messageErr2 = t("An error occured, try again!")
-  
+
     const { data, isLoading , isSuccess, status} = useQuery("illnessList", getIllness, {
       keepPreviousData: true,
       onSuccess: data => {
@@ -78,8 +78,8 @@ import AddIllnessModal from "../../forms/add-illness/add-illness";
        notify("error", messageErr2);
       },
    });
-  
-  
+
+
     return (
       <Card className={classes.paper}>
       {status === "error" && <p>Error fetching data</p>}
@@ -145,5 +145,5 @@ import AddIllnessModal from "../../forms/add-illness/add-illness";
       </Card>
     );
   };
-  
+
   export default AdminDashboard;

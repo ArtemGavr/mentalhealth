@@ -8,10 +8,10 @@ const IllnessCard = (illness) => {
   const classes = useStyles();
   const { t } = useTranslation();
   let title;
-  console.log(illness.illness.ilnessId)
-  if (illness.illness.ilnessId === "61802ac813cc0dae9bb3ba91"){
-    title = "COVID"
-  }
+  console.log(illness.ilnessId)
+
+  title = "Anxiety"
+
   console.log(title)
 
 
@@ -19,12 +19,12 @@ const IllnessCard = (illness) => {
       <Grid className={classes.paper} container direction="row" alignItems="center">
       <Grid item xs={9} >
         <Typography className={classes.title} variant="body1">
-       <strong> {t("Title")}</strong>
+       <strong> {t("Name")}</strong>
         </Typography>
         </Grid>
         <Grid item xs={3} >
         <Typography className={classes.title} variant="body1">
-        <strong> {t("Stage")} </strong>
+        <strong> {t("Severity")} </strong>
         </Typography>
         </Grid>
       <Grid item xs={9} >
@@ -34,7 +34,7 @@ const IllnessCard = (illness) => {
         </Grid>
         <Grid item xs={3} >
         <Typography className={classes.title} variant="body1">
-        {illness.illness.stage}
+        2
         </Typography>
         </Grid>
         </Grid>

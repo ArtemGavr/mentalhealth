@@ -11,8 +11,8 @@ import { createIllnes } from "../../../api/illness";
 
 
 const INITIAL_FORM_STATE = {
-  title: '',
-  stage: 0,
+  name: '',
+  severity: 0,
 };
 
 const AddIllnessModal = ({open, handleClose}) => {
@@ -55,7 +55,11 @@ const AddIllnessModal = ({open, handleClose}) => {
           </Grid>
           <Formik
             initialValues={INITIAL_FORM_STATE}
-            onSubmit={values => mutation.mutate(values)}
+
+            onSubmit={values => {
+              console.log(values)
+              mutation.mutate(values)
+              }}
           >
             {({ values, handleChange, errors, touched }) => (
               <Form>
@@ -66,12 +70,13 @@ const AddIllnessModal = ({open, handleClose}) => {
                   <Grid item xs={6}>
                     <TextField
                       className={classes.field}
-                      value={values.title}
+                      value={values.name}
+                      //{handleChange}
                       onChange={handleChange}
-                      name="title"
+                      name="name"
                       type="text"
                     />
-                    {errors.title && touched.title ? <div>{errors.title}</div> : null}
+                    {errors.name && touched.name ? <div>{errors.name}</div> : null}
                   </Grid>
                   <Grid item xs={6}>
                     <FormLabel>{t("Level")}</FormLabel>
@@ -81,11 +86,11 @@ const AddIllnessModal = ({open, handleClose}) => {
                       <InputLabel>{t("Level")}</InputLabel>
                       <Select
                         native
-                        value={values.stage}
+                        value={values.severity}
                         onChange={handleChange}
-                        label="stage"
+                        label="severity"
                         inputProps={{
-                          name: "stage",
+                          name: "severity",
                         }}
                       >
                         <option aria-label="None" value="" />
@@ -94,7 +99,7 @@ const AddIllnessModal = ({open, handleClose}) => {
                         <option value={extra}> 3</option>
                       </Select>
                     </FormControl>
-                    {errors.stage && touched.stage ? <div>{errors.stage}</div> : null}
+                    {errors.severity && touched.severity ? <div>{errors.severity}</div> : null}
                   </Grid>
                   <Grid item>
                     <Button

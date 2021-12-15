@@ -58,11 +58,7 @@ const Profile = () => {
               {t("sex")}: <strong>{user.patientWithEmail.bodies[0].sex ? "man" : "women"}</strong>
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={12}>
-          <Typography variant="subtitle1" color="textSecondary">
-          {t("weight")}: <strong>{user.patientWithEmail.bodies[0].weight}</strong>
-          </Typography>
-          </Grid>
+
           <Grid item xs={12} sm={12}>
           <Typography variant="subtitle1" color="textSecondary">
           {t("mail")}: <strong>{user.patientWithEmail.email}</strong>

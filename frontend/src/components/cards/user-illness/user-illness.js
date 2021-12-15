@@ -19,11 +19,12 @@ const UserIllness = () => {
 
   const history = useHistory();
   const { status, data } = useQuery("userIllness", getUserIllness, {
-      onSuccess:() => {
+      onSuccess:(data) => {
+        console.log("--------------------")
         console.log(data);
       },
     onError: () => {
-      notify("error", t("An error occured, please reload this page!"));
+      notify("error", t("An error occured getting illness, please reload this page!"));
     },
   });
 
@@ -52,11 +53,7 @@ const UserIllness = () => {
             <Grid item xs={12}>
              {data.map(illness => <IllnessCard key={illness._id} illness={illness} />)}
             </Grid>
-            <Grid item xs={12}>
-            <Button  className={classes.button} onClick={redirectToIllness}>
-              {t("Add new illness")}
-            </Button>
-          </Grid>
+
           </Grid>
         </Card>
       )}

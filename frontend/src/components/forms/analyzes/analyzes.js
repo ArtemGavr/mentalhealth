@@ -11,13 +11,12 @@ import { addAnalyzes } from "../../../api/analyzes";
 
 
 const Analyzes = props => {
-   
+
   const formik = useFormik({
     initialValues :{
-    temp: 0,
-    heartRate:0,
-    saturation: 0
-  }, 
+    temp: 36,
+    heartRate: 60
+  },
   onSubmit:values => mutation.mutate(values)
     } )
 
@@ -29,14 +28,14 @@ const Analyzes = props => {
     toast({ type, message });
   }, []);
 
-  
+
 
   const mutation = useMutation(addAnalyzes, {
     onSuccess: ({data }) => {
         console.log(data)
         redirectToBlood();
           notify("success", t("Your answers were saved"));
-          
+
     },
     onError: () => {
       notify("error", t("Invalid username or password, please try again!"));
@@ -94,26 +93,7 @@ const Analyzes = props => {
               />
 
             </Grid>
-            <Grid item xs={8}>
-                    <FormLabel>{t("Saturation")}</FormLabel>
-             </Grid>
-            <Grid item className={classes.container} xs={3}>
-              <TextField
-              value={formik.values.saturation}
-              fullWidth
-              onChange={formik.handleChange}
-              InputProps={{
-               inputProps: {
-                 max: 100,
-                 min: 40,
-               },
-             }}
-             name="saturation"
-             placeholder="Enter your saturation"
-             type="number"
-              />
 
-            </Grid>
             <Grid item className={classes.buttonAllign} xs ={12}>
               <Button className={classes.button} type="submit" variant="contained" color="primary">
                 {t("Continue")}

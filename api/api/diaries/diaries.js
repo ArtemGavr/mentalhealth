@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const PatientAnalyzes = require("../../models/diaries");
+const PatientDiaries = require("../../models/diaries");
 const { permit } = require("../../middlewares/permition_roles");
 //routes
 router.get("/last", permit(["patient"]), getLast);
@@ -43,16 +43,13 @@ async function create(req, res) {
   try {
     let newDiaries = {};
     const {
-        heartRate,
-        saturation,
-        temp } = req.body;
-        const title = "covid";
-    newDiaries= { title, heartRate, saturation, temp };
+        note} = req.body;
+    newDiaries= { note };
     newDiaries.patient = req.patient.id;
     let foundPatient = req.patient;
     foundPatient.patientDiaries.push(newDiaries);
     await foundPatient.save();
-    res.json(PatientAnalyzes.format(newDiaries));
+    res.json(PatientDiaries.format(newDiaries));
   } catch (error) {
     res.status(500).json({
       message: "An error occurred",

@@ -55,7 +55,7 @@ i18n
               "Add new illness by clicking on this button":
               "Add new illness by clicking on this button",
               "Add illness":"Add Illness",
-              Name: "Name",
+              name: "Name",
               surname: "surname",
               Temperature:"Temperature",
               "Heart rate":"Heart rate",

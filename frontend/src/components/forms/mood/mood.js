@@ -2,34 +2,31 @@ import { Grid, Paper, Avatar, Button, TextField, Typography, FormLabel, Circular
 import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
 import { useMutation, useQuery } from "react-query";
-import { useStyles } from "./blood.styles";
+import { useStyles } from "./mood.styles";
 import MedicationIcon from '@mui/icons-material/Medication';
 import React, {useEffect} from "react";
 import {Link, useHistory, } from "react-router-dom";
 import toast from "../../toast";
-import {  getLastAnalyzes } from "../../../api/analyzes";
+import {  getUserDiariesLast } from "../../../api/user-notes";
 import { addBlood } from "../../../api/blood";
 
 
 
-const Blood = props => {
-   
+const Mood = props => {
+
   const formik = useFormik({
     initialValues :{
-    eryth: 0,
-    hemo:0,
-    leuko: 0,
-    trombo:0,
-    bezof:0,
-    ezino:0,
-    limfo:0,
-    mono:0,
-  }, 
+      stress: 0,
+      anxiety: 0,
+      depression: 0,
+      general: 0,
+      happiness: 0,
+  },
   onSubmit:values => {
-     const blood = {values, analyzesId}
-      mutation.mutate(blood)}
+     const mood = {values, diariesId}
+      mutation.mutate(mood)}
     } )
-const [analyzesId, setAnalyzesId ] = React.useState("");
+const [diariesId, setDiariesId ] = React.useState("");
 
   const classes = useStyles();
     const history = useHistory();
@@ -38,10 +35,10 @@ const [analyzesId, setAnalyzesId ] = React.useState("");
     const notify = React.useCallback((type, message) => {
     toast({ type, message });
   }, []);
-  const { status, data } = useQuery("analyzes", getLastAnalyzes, {
+  const { status, data } = useQuery("lastDiary", getUserDiariesLast, {
     keepPreviousData: true,
       onSuccess:(data) => {
-       setAnalyzesId(data._id);
+       setDiariesId(data._id);
       },
     onError: () => {
       notify("error", t("An error occured, please reload this page!"));
@@ -52,7 +49,7 @@ const [analyzesId, setAnalyzesId ] = React.useState("");
     onSuccess: ({data }) => {
         redirectToMental();
           notify("success", t("Your answers were saved"));
-          
+
     },
     onError: () => {
       notify("error", t("Something went wrong, please try again!"));
@@ -200,7 +197,7 @@ type="number"
 />
 
 </Grid>
-         
+
          <Grid item xs={8}>
                     <FormLabel>{t("Lymphocytes")}</FormLabel>
                   </Grid>
@@ -254,4 +251,4 @@ type="number"
   );
 };
 
-export default Blood;
+export default Mood;

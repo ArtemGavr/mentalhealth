@@ -14,7 +14,7 @@ import ProfilePage from './pages/profile-page';
 import Navbar from './components/bars/header/header';
 import IllnessPage from './pages/illness-page';
 import AnalyzesPage from './pages/analyzes-page';
-import BloodPage from './pages/blood-page';
+import MoodPage from './pages/mood-page';
 import MentalPage from './pages/mental-page';
 import ResultsPage from './pages/results';
 import AdminPage from './pages/admin-page';
@@ -36,7 +36,7 @@ function App() {
   return (
     <Provider store={store}>
     <QueryClientProvider client={queryClient}>
-    <ThemeProvider theme={theme}> 
+    <ThemeProvider theme={theme}>
     <Navbar />
     <Switch>
         <Route exact path="/">
@@ -54,8 +54,8 @@ function App() {
       <Route path="/analyzes">
       <AnalyzesPage/>
     </Route>
-    <Route path="/blood">
-      <BloodPage />
+    <Route path="/moods">
+      <MoodPage/>
     </Route>
     <Route path="/mental">
       <MentalPage/>

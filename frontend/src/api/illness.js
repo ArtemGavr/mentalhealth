@@ -13,8 +13,8 @@ export const getIllness = async () => {
 
   export const createIllnes = async data => {
     try {
-      const { title, stage  } = data;
-      const illness = {  title, stage };
+      const { name, severity  } = data;
+      const illness = {  name, severity };
       console.log(illness);
       const response = await axios.post("/api/illness", illness);
       return response.data;

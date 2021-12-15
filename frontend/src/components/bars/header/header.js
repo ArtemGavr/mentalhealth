@@ -49,8 +49,8 @@ const Navbar = () => {
                     </Typography>
                              <Typography
                               className={classes.link}
-                         onClick={() => {history.push("/analyzes");}}>
-                          {t("Health Check")}
+                         onClick={() => {history.push("/mental");}}>
+                          {t("Self input")}
                              <MedicationIcon/>
                               </Typography>
                         <Typography

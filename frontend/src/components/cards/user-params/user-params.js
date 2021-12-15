@@ -25,15 +25,17 @@ const UserParams = () => {
       if(window.localStorage.getItem("i18nextLng") === "en") {
        let weight = Math.round(data.weight * 2.2);
        let height = Math.round(data.height * 0.03);
-       setParams([weight, height])
+       let sex = data.sex;
+       setParams([weight, height, sex])
       }else{
      let  weight = data.weight
      let height = data.height
-      setParams([weight, height])
+        let sex = data.sex;
+      setParams([weight, height, sex])
       }
     }
   });
-  
+
   return (
     <Grid container>
       {status === "error" && <p>Error fetching data</p>}
@@ -48,24 +50,28 @@ const UserParams = () => {
         <Card className={classes.paper}>
           <Grid container direction="column">
             <Typography color="primary" variant="h5">
-              {t("My current parameters")}
+              {t("My body parameters")}
             </Typography>
           </Grid>
           <Grid className={classes.paramContainer} container alignItems="flex-start" spacing={1}>
             <Grid item xs={12}>
               <Typography variant="subtitle1" color="textSecondary">
-                {t("My weight")}: <strong> {params[0]}</strong>
+                {t("My weight")}: <strong> {params[1]}</strong>
               </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="subtitle1" color="textSecondary">
-                {t("My height")}: <strong>{params[1]}</strong>
+                {t("My height")}: <strong>{params[0]}</strong>
               </Typography>
             </Grid>
-
+            <Grid item xs={12}>
+              <Typography variant="subtitle1" color="textSecondary">
+                {t("My sex")}: <strong> {params[2] ? "man" : "women"}</strong>
+              </Typography>
+            </Grid>
             <Grid item xs={12}>
               <Button  className={classes.button} onClick={handleOpen}>
-                {t("Add new parameters")}
+                {t("Add new body parameters")}
               </Button>
             </Grid>
             <AddBodyParamsModal open={open} handleClose={handleClose} />

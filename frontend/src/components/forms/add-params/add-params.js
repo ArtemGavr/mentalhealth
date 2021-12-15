@@ -103,18 +103,18 @@ const AddBodyParamsModal = ({open, handleClose}) => {
                     {errors.height && touched.height ? <div>{errors.height}</div> : null}
                   </Grid>
                   <Grid item xs={6}>
-                    <FormLabel>{t("Activity")}</FormLabel>
+                    <FormLabel>{t("Sex")}</FormLabel>
                   </Grid>
                   <Grid item xs={6}>
                     <FormControl variant="outlined" className={classes.formControl}>
-                      <InputLabel>{t("Activity")}</InputLabel>
+                      <InputLabel>{t("Sex")}</InputLabel>
                       <Select
                         native
-                        value={values.activity}
+                        value={values.sex}
                         onChange={handleChange}
                         label="Gender"
                         inputProps={{
-                          name: "activity",
+                          name: "sex",
                         }}
                       >
                         <option aria-label="None" value="" />
@@ -123,7 +123,7 @@ const AddBodyParamsModal = ({open, handleClose}) => {
                         <option value={extra}>{t("5 times a week")}</option>
                       </Select>
                     </FormControl>
-                    {errors.activity && touched.activity ? <div>{errors.activity}</div> : null}
+                    {errors.sex && touched.sex ? <div>{errors.sex}</div> : null}
                   </Grid>
                   <Grid item>
                     <Button

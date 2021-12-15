@@ -2,7 +2,7 @@ import axios from "../utils/axios";
 
 export const getCurrentParams = async () => {
     try {
-      const response = await axios.get("/api/params/last");
+      const response = await axios.get("/api/bodies/last");
       return response.data;
     } catch (error) {
       console.error(error);
@@ -12,7 +12,7 @@ export const getCurrentParams = async () => {
 
   export const getUserParams = async () => {
     try {
-      const response = await axios.get("/api/params");
+      const response = await axios.get("/api/bodies");
       return response.data;
     } catch (error) {
       console.error(error);
@@ -20,9 +20,19 @@ export const getCurrentParams = async () => {
     }
   };
 
+export const getUserBodyParams = async () => {
+  try {
+    const response = await axios.get("/api/healthParams");
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return error.response.data;
+  }
+};
+
   export const addBodyParams = async data => {
     try {
-      const response = await axios.post("/api/params", data);
+      const response = await axios.post("/api/bodies", data);
       return response.data;
     } catch (error) {
       console.error(error.response.data);
