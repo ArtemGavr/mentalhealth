@@ -20,6 +20,7 @@ const Profile = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const user = JSON.parse(sessionStorage.getItem('user'))
+  console.log("-------------------------")
     console.log(user)
     useEffect(() => {
         console.log( JSON.parse(sessionStorage.getItem('user')))
@@ -27,6 +28,7 @@ const Profile = () => {
            history.push('/login');
         }
     })
+
     return (
         <Card className={classes.paper}>
         <Grid container direction="column">
@@ -35,42 +37,48 @@ const Profile = () => {
               {t("My account")}:
             </Typography>
           </Grid>
-  
+
           <Grid item xs={12} sm={12}>
             <Typography variant="subtitle1" color="textSecondary">
-              {t("First Name")}: <strong>{user.userWithEmail.firstName}</strong>
+              {t("First Name")}: <strong>{user.patientWithEmail.name}</strong>
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12}>
             <Typography variant="subtitle1" color="textSecondary">
-              {t("Last Name")}: <strong>{user.userWithEmail.lastName}</strong>
+              {t("Last Name")}: <strong>{user.patientWithEmail.surname}</strong>
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12}>
             <Typography variant="subtitle1" color="textSecondary">
-              {t("sex")}: <strong>{user.userWithEmail.sex}</strong>
+              {t("Job title")}: <strong>{user.patientWithEmail.jobTitle}</strong>
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12}>
             <Typography variant="subtitle1" color="textSecondary">
-              {t("age")}: <strong>{user.userWithEmail.age}</strong>
+              {t("sex")}: <strong>{user.patientWithEmail.bodies[0].sex ? "man" : "women"}</strong>
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12}>
           <Typography variant="subtitle1" color="textSecondary">
-          {t("doc's gmail")}: <strong>{user.userWithEmail.doctorMail}</strong>
+          {t("weight")}: <strong>{user.patientWithEmail.bodies[0].weight}</strong>
           </Typography>
           </Grid>
           <Grid item xs={12} sm={12}>
           <Typography variant="subtitle1" color="textSecondary">
-          {t("mail")}: <strong>{user.userWithEmail.email}</strong>
+          {t("mail")}: <strong>{user.patientWithEmail.email}</strong>
           </Typography>
           </Grid>
           <Grid item xs={12} sm={12}>
           <IconButton className={classes.editButton} size="small" className={classes.editButton} aria-label="edit" onClick={handleOpen} >
          <EditIcon color="primary" />
       </IconButton>
-      <EditProfileModal open={open} handleClose={handleClose} values={{lastName: user.userWithEmail.lastName, firstName: user.userWithEmail.firstName, email: user.userWithEmail.email, password: user.userWithEmail.password, age:  user.userWithEmail.age, doctorMail: user.userWithEmail.doctorMail, id: user.userWithEmail.id}}/>
+      <EditProfileModal open={open} handleClose={handleClose} values={
+        {surname: user.patientWithEmail.surname,
+          name: user.patientWithEmail.name,
+          email: user.patientWithEmail.email,
+          password: user.patientWithEmail.password,
+          jobTitle:  user.patientWithEmail.jobTitle,
+          id: user.patientWithEmail.id}}/>
       </Grid>
         </Grid>
       </Card>

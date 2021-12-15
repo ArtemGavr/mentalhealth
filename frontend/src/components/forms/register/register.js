@@ -24,15 +24,13 @@ const Register = () => {
 
   const formik = useFormik({
     initialValues :{
-    firstName: "",
-    lastName: "",
+    name: "",
+    surname: "",
     email: "",
-    age: "",
-    sex: "",
-    doctorMail: "",
+    jobTitle: "",
     password: "",
     confirmPassword: "",
-  }, validationSchema: register_shema,
+  }, //validationSchema: //register_shema,
   onSubmit:values => mutation.mutate(values)
     } );
 
@@ -64,19 +62,19 @@ const Register = () => {
            <Grid container alignItems="center">
            <Grid item className={classes.container} xs={12}>
            <TextField
-             value={formik.values.firstName}
+             value={formik.values.name}
              onChange={formik.handleChange}
              fullWidth
-             name="firstName"
+             name="name"
              placeholder={t("Enter your name")}
              type="text"
            />
            <Grid item className={classes.container} xs={12}>
            <TextField
-             value={formik.values.lastName}
+             value={formik.values.surname}
              onChange={formik.handleChange}
              fullWidth
-             name="lastName"
+             name="surname"
              placeholder={t("Enter your surname")}
              type="text"
            />
@@ -97,48 +95,14 @@ const Register = () => {
            value={formik.values.doctorMail}
            onChange={formik.handleChange}
            fullWidth
-           name="doctorMail"
-           placeholder={t("Enter your doctor's email")}
-           type="email"
+           name="job title"
+           placeholder={t("Enter your job title")}
+           type="text"
          />
-         {formik.errors.doctorMail && formik.touched.doctorMail ? <div>{formik.errors.doctorMail}</div> : null}
+         {formik.errors.jobTitle && formik.touched.jobTitle ? <div>{formik.errors.jobTitle}</div> : null}
        </Grid>
-         <Grid item className={classes.container} xs={12}>
-         <TextField
-           value={formik.values.age}
-           onChange={formik.handleChange}
-           fullWidth
-           InputProps={{
-            inputProps: {
-              max: 100,
-              min: 0,
-            },
-          }}
-          name="age"
-          placeholder={t("Enter your age")}
-          type="number"
-         />
-         {formik.errors.age && formik.touched.age ? <div>{formik.errors.age}</div> : null}
-       </Grid>
-       <Grid item className={classes.container} xs={12}>
-       <FormControl variant="outlined" className={classes.formControl}>
-       <InputLabel>{t("Gender")}</InputLabel>
-       <Select
-         native
-         value={formik.values.sex}
-         onChange={formik.handleChange}
-         label="Gender"
-         inputProps={{
-           name: "sex",
-         }}
-       >
-         <option aria-label="None" value="" />
-         <option value="male">{t("Male")}</option>
-         <option value="female">{t("Female")}</option>
-       </Select>
-     </FormControl>
-       {formik.errors.sex && formik.touched.sex ? <div>{formik.errors.sex}</div> : null}
-     </Grid>
+
+
 
          </Grid>
             <Grid item className={classes.container} xs={12}>

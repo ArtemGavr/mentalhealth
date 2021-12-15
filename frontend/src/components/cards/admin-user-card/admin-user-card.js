@@ -52,8 +52,8 @@ import {
       onSuccess: data => {
         console.log(data);
        const rows = data.data.map(item => {
-        const { _id, firstName, lastName } = item;
-          return { id: _id, firstName, lastName };
+        const { _id, name, surname } = item;
+          return { id: _id, name, surname };
         });
         setIllness(rows);
        console.log(rows);

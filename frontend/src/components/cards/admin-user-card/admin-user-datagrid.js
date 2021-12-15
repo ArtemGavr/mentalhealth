@@ -1,5 +1,5 @@
 export const userGrid = [
-    { field: "firstName", headerName: "Name", width: 120 },
-    { field: "lastName", headerName: "Lastname", type: "number", width: 150 },
+    { field: "name", headerName: "Name", width: 120 },
+    { field: "surname", headerName: "surname", type: "number", width: 150 },
   ];
   

@@ -24,7 +24,7 @@ const dispatch = useDispatch();
     initialValues :{
     email: "",
     password: "",
-  }, validationSchema: login_shema,
+  },// validationSchema: login_shema,
   onSubmit:values => {
     const i18nextLng = window.localStorage.getItem("i18nextLng");
     window.localStorage.setItem("i18nextLng", i18nextLng )
@@ -39,11 +39,11 @@ const dispatch = useDispatch();
   }, []);
 
   const mutation = useMutation(authenticate, {
-    onSuccess: ({userWithEmail, token }) => {
-        console.log(userWithEmail, token
+    onSuccess: ({patientWithEmail, token }) => {
+        console.log(patientWithEmail, token
             );
 
-       const newUser = {userWithEmail, token}
+       const newUser = {patientWithEmail, token}
         dispatch(ActionCreators.login(newUser));
           notify("success", t("Successfully logged in"));
           redirectToProfile();

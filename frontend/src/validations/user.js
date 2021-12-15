@@ -6,8 +6,8 @@ export const login_shema = Yup.object().shape({
   });
 
 export const register_shema = Yup.object().shape({
-    firstName: Yup.string().max(15, "Must be 15 characters or less").required("Required"),
-    lastName: Yup.string().max(15, "Must be 15 characters or less").required("Required"),
+    name: Yup.string().max(15, "Must be 15 characters or less").required("Required"),
+    surname: Yup.string().max(15, "Must be 15 characters or less").required("Required"),
     email: Yup.string().email("Email is invalid").required("Email is required"),
     age: Yup.number().min(16, "You cannot be under 16").max(100, "Please enter valid age").required("Required"),
     sex: Yup.string().required("This field is required"),
@@ -18,8 +18,8 @@ export const register_shema = Yup.object().shape({
   });
 
   export const edit_user_shema = Yup.object().shape({
-    firstName: Yup.string().max(15, "Must be 15 characters or less").optional(),
-    lastName: Yup.string().max(15, "Must be 15 characters or less").optional(),
+    name: Yup.string().max(15, "Must be 15 characters or less").optional(),
+    surname: Yup.string().max(15, "Must be 15 characters or less").optional(),
     email: Yup.string().email("Email is invalid").optional(),
     age: Yup.number().min(16, "You cannot be under 16").max(100, "Please enter valid age").optional(),
     password: Yup.string().optional(),

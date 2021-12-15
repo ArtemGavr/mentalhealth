@@ -13,9 +13,9 @@ export const authenticate = async user => {
 
 export const create = async data => {
     try {
-      const { firstName, lastName, age, sex,  password, email, doctorMail  } = data;
+      const { name, surname, age, sex,  password, email, doctorMail  } = data;
       sessionStorage.clear()
-      const user = {  firstName, lastName, age, sex,  password, email, doctorMail };
+      const user = {  name, surname, age, sex,  password, email, doctorMail };
       console.log(user);
       const response = await axios.post("/api/patient", JSON.stringify(user));
       return response.data;
@@ -26,10 +26,10 @@ export const create = async data => {
 
   export const update = async data => {
     try{
-      const { lastName, firstName,  password, mail, doctorMail, age, confirmPassword } = data.values;
+      const { surname, name,  password, mail, doctorMail, age, confirmPassword } = data.values;
       const {id} = data;
       console.log(id);
-      const user = { lastName, firstName,  password, mail, doctorMail, age, confirmPassword };
+      const user = { surname, name,  password, mail, doctorMail, age, confirmPassword };
       const response = await axios.put(`/api/patient/${id}`, user);
       sessionStorage.clear();
       return response.data;

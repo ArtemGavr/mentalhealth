@@ -30,7 +30,7 @@ const Navbar = () => {
             <AppBar className={classes.appbar} position="static">
                 <Toolbar>
                     <Typography variant="h4" className={classes.logo}>
-                            InspectMe  
+                            MentalHealth
                     </Typography>
                     <div className={classes.navlinks}>
                     <AdminOnly user={user} >

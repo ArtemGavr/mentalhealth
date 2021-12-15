@@ -157,6 +157,7 @@ async function del(req, res) {
 async function login(req, res) {
   try {
     const { email, password } = req.body;
+    console.log(email, password)
     const patientWithEmail = await patient.findOne({ email });
     await bcrypt.compare(password, patientWithEmail.password, (err, data) => {
       if (err) throw err;

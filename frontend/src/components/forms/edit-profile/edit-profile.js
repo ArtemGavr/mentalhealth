@@ -9,7 +9,7 @@ import { update } from "../../../api/patient";
 import toast from "../../toast";
 import {useHistory} from "react-router-dom";
 
-const id = (JSON.parse(sessionStorage.getItem('user')) !== null) ? JSON.parse(sessionStorage.getItem('user')).userWithEmail._id:
+const id = (JSON.parse(sessionStorage.getItem('user')) !== null) ? JSON.parse(sessionStorage.getItem('user')).patientWithEmail._id:
 0;
 
 
@@ -36,14 +36,14 @@ const EditProfileModal = ({open, handleClose, values}) => {
           }, []);
     const formik = useFormik({
         initialValues :{
-            firstName: values.firstName || '',
-            lastName: values.lastName||'',
-            age: values.age || 0,
+            name: values.name || '',
+            surname: values.surname||'',
+
             email: values.email || "",
-            doctorMail: values.doctorMail || '',
+
             password:  '',
             confirmPassword: '',
-        }, validationSchema: edit_user_shema,
+        }, //validationSchema: edit_user_shema,
         onSubmit:values => {
           const user = {values, id}
           mutation.mutate(user)}
@@ -63,19 +63,19 @@ const EditProfileModal = ({open, handleClose, values}) => {
             <Grid container alignItems="center">
             <Grid item className={classes.container} xs={12}>
             <TextField
-              value={formik.values.firstName}
+              value={formik.values.name}
               onChange={formik.handleChange}
               fullWidth
-              name="firstName"
+              name="name"
               placeholder="Enter your name"
               type="text"
             />
             <Grid item className={classes.container} xs={12}>
             <TextField
-              value={formik.values.lastName}
+              value={formik.values.surname}
               onChange={formik.handleChange}
               fullWidth
-              name="lastName"
+              name="surname"
               placeholder="Enter your surname"
               type="text"
             />
@@ -91,34 +91,8 @@ const EditProfileModal = ({open, handleClose, values}) => {
             />
             {formik.errors.email && formik.touched.email ? <div>{formik.errors.email}</div> : null}
           </Grid>
-          <Grid item className={classes.container} xs={12}>
-          <TextField
-            value={formik.values.doctorMail}
-            onChange={formik.handleChange}
-            fullWidth
-            name="doctorMail"
-            placeholder="Enter your doctor's email"
-            type="email"
-          />
-          {formik.errors.doctorMail && formik.touched.doctorMail ? <div>{formik.errors.doctorMail}</div> : null}
-        </Grid>
-          <Grid item className={classes.container} xs={12}>
-          <TextField
-            value={formik.values.age}
-            onChange={formik.handleChange}
-            fullWidth
-            InputProps={{
-             inputProps: {
-               max: 100,
-               min: 0,
-             },
-           }}
-           name="age"
-           placeholder="Enter your age"
-           type="number"
-          />
-          {formik.errors.age && formik.touched.age ? <div>{formik.errors.age}</div> : null}
-        </Grid>
+
+
 
           </Grid>
              <Grid item className={classes.container} xs={12}>
