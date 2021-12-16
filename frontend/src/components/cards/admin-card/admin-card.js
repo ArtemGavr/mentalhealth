@@ -56,8 +56,8 @@ import AddIllnessModal from "../../forms/add-illness/add-illness";
       onSuccess: data => {
         console.log(data);
        const rows = data.illness.map(item => {
-        const { _id, title, stage } = item;
-          return { id: _id, title, stage };
+        const { _id, name, severity } = item;
+          return { id: _id, name, severity };
         });
         setIllness(rows);
        console.log(rows);

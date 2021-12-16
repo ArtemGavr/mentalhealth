@@ -118,9 +118,8 @@ const AddBodyParamsModal = ({open, handleClose}) => {
                         }}
                       >
                         <option aria-label="None" value="" />
-                        <option value={min}>{t("Once a week")}</option>
-                        <option value={mid}>{t("3 times a week")}</option>
-                        <option value={extra}>{t("5 times a week")}</option>
+                        <option value={true}>{t("Male")}</option>
+                        <option value={false}>{t("Female")}</option>
                       </Select>
                     </FormControl>
                     {errors.sex && touched.sex ? <div>{errors.sex}</div> : null}

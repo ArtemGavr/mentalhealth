@@ -1,5 +1,4 @@
 export const foodGrid = [
-    { field: "title", headerName: "Title", width: 120 },
-    { field: "stage", headerName: "Level", type: "number", width: 120 },
+    { field: "name", headerName: "Name", width: 120 },
+    { field: "severity", headerName: "Severity", type: "number", width: 120 },
   ];
-  
