@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 import React from "react";
 import { useStyles } from "./diary-card.styles";
 import toast from "../../toast";
-import { getUserDiaries } from "../../../api/us";
+import { getUserDiaries } from "../../../api/user-diaries";
 import NoteCard from "../note-card/note-card";
-import ModalAddNote from "../../forms/add-diary/add-note";
+import ModalAddNote from "../../forms/add-diary/add-diary";
 
 const Diary = () => {
   const classes = useStyles();
