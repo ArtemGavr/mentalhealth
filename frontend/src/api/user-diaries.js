@@ -1,6 +1,6 @@
 import axios from "../utils/axios";
 
-export const getUserNotes = async () => {
+export const getUserDiaries = async () => {
     try {
       const response = await axios.get("/api/diaries");
       return response.data;
@@ -10,7 +10,7 @@ export const getUserNotes = async () => {
     }
   };
 
-  export const addUserNote = async data => {
+  export const addUserDiary = async data => {
     try {
       const response = await axios.post("/api/diaries", data);
       return response.data;

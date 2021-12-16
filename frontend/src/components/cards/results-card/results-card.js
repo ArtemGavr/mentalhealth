@@ -14,7 +14,7 @@ const getCurrentDate =() => {
      let year = newDate.getFullYear();
      let hour = newDate.getHours();
      let minutes = newDate.getMinutes();
-     
+
      return `${year}.${month<10?`0${month}`:`${month}`}.${date}  ${hour}:${minutes}`
 }
 const Results = () => {
@@ -44,10 +44,6 @@ const Results = () => {
         arr.push(saturationComment, passedComment, heartRateComment, mentalComment);
         console.log(arr)
         setComments(arr)
-      
-            
-         
-          
     },
     onError: () => {
       notify("error", messageErr);
@@ -79,17 +75,10 @@ const Results = () => {
     doc.text(360, 420, `${date}`)
     doc.addImage(logo, "PNG", 360, 450, 180, 180)
 
-    
-
-
-    
-
     //doc.text(20, 100, 'This is the second title.')
-    //doc.text(20, 140, 'This is the thrid title.')      
-
-    
+    //doc.text(20, 140, 'This is the thrid title.')
     doc.save('results.pdf')
-  }   
+  }
 
   return (
     <Grid container>
@@ -106,7 +95,7 @@ const Results = () => {
         <Grid container direction="column" justifyContent="center">
           <Grid item sm={12} >
             <Typography color="primary" variant="h5">
-             Your results are ready
+             Your recommendations are ready
             </Typography>
           </Grid>
           <Grid item sm={12}>

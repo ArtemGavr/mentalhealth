@@ -1,0 +1,15 @@
+{
+  "name": "mentalhealth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^6.4.0"
+  },
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix=./backend/\" \"npm run start --prefix=./frontend/\""
+  },
+  "author": "",
+  "license": "ISC"
+}

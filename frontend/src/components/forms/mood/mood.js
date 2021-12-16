@@ -7,7 +7,7 @@ import MedicationIcon from '@mui/icons-material/Medication';
 import React, {useEffect} from "react";
 import {Link, useHistory, } from "react-router-dom";
 import toast from "../../toast";
-import {  getUserDiariesLast } from "../../../api/user-notes";
+import {  getUserDiariesLast } from "../../../api/user-diaries";
 import { addBlood } from "../../../api/blood";
 
 

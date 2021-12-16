@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 import React from "react";
 import { useStyles } from "./diary-card.styles";
 import toast from "../../toast";
-import { getUserNotes } from "../../../api/user-notes";
+import { getUserDiaries } from "../../../api/us";
 import NoteCard from "../note-card/note-card";
-import ModalAddNote from "../../forms/add-note/add-note";
+import ModalAddNote from "../../forms/add-diary/add-note";
 
 const Diary = () => {
   const classes = useStyles();
@@ -18,7 +18,7 @@ const Diary = () => {
   const handleClose = () => setOpen(false);
   const { t } = useTranslation();
   const messageErr = t("An error occured, please reload this page");
-  const { status, data } = useQuery("notes22", getUserNotes, {
+  const { status, data } = useQuery("diaries_new", getUserDiaries, {
     onError: () => {
       notify("error", messageErr);
     },

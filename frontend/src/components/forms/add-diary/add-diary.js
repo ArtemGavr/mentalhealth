@@ -1,11 +1,11 @@
 import { Grid, Button, Typography, Card, TextField, Modal, Box} from "@material-ui/core";
-import { useStyles } from "./add-note.styles";
+import { useStyles } from "./add-diary.styles";
 import {useFormik} from "formik";
 import { useTranslation } from "react-i18next";
 import { useMutation } from "react-query";
 import toast from "../../toast";
 import React from "react";
-import { addUserNote } from "../../../api/user-notes";
+import { addUserDiary } from "../../../api/user-diaries";
 
 const ModalAddNote = ({open, handleClose}) => {
   const classes = useStyles();
@@ -13,7 +13,7 @@ const ModalAddNote = ({open, handleClose}) => {
   const notify = React.useCallback((type, message) => {
     toast({ type, message });
 }, []);
-  const mutation = useMutation( addUserNote, {
+  const mutation = useMutation( addUserDiary, {
     onSuccess: (data) => {
 
     notify("success", t("Your comment is added"));

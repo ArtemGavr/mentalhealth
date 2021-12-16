@@ -5,8 +5,6 @@ import Results from "../components/cards/results-card/results-card";
 
 
 const ResultsPage = () => {
-
-   
     return(
         <Results />
     )
