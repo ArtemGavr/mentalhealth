@@ -122,8 +122,8 @@ const Results = () => {
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12}>
-            <Typography variant="subtitle1" color="textSecondary">
-              {t("Recommendations")}: <strong>{t(commments[0]) + " " + t(commments[1]) + " " + t(commments[2])}</strong>
+            <Typography variant="h6" color="textSecondary">
+              {t("Recommendations")}: <strong>{`\n `  + t(commments[0]) + `\n `  + t(commments[1]) + `\n ` + t(commments[2])}</strong>
             </Typography>
           </Grid>
 
