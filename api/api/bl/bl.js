@@ -38,7 +38,7 @@ async function bl(req, res) {
       const lastAnxiety = anxiety[anxiety.length - 1];
       const {_id, severity} = lastAnxiety;
 
-      severity_p = severity;
+      severity_p = 2 ;
     }
 
 

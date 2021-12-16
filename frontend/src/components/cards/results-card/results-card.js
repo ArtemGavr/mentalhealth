@@ -28,20 +28,16 @@ const Results = () => {
   const { status, data } = useQuery("results", getResults, {
     onSuccess: data => {
         let heartRateComment = "";
-        let saturationComment = "";
-        let passedComment = "";
         let mentalComment = "";
+      let weightComment = "";
         console.log(data);
-        (data.saturation<93) ?  saturationComment = "We advise you to get lungs screen and go to the specialist":
-        saturationComment ="Your saturation looks okay";
-        (data.passed) ? passedComment ="Your blood test: passed":
-        passedComment ="Your blood test: failed";
-        (data.heartRate > 99 || data.heartRate < 59) ? heartRateComment="We advise you to make a visit to cardiologist":
-        heartRateComment = "Your heart looks okay";
-        (data.mentalInstruction) ? mentalComment ="Your mental state is okay":
-        mentalComment ="We advise you to make a psychologist visit";
+         data.weightIsOk ? weightComment = t("Your weight looks good. ") : weightComment = t("Obesity might cause productivy loss and depression. ");
+        (data.hr > 99 || data.hr < 59) ? heartRateComment=t("Heart rate over normal might be caused by stress. "):
+        heartRateComment = t("Your cardiovascular system looks okay. ");
+        (data.mentalInstruction) ? mentalComment =t("We strongly advise a visit to a therapist. "):
+        mentalComment =t("Your mental health is good. ");
         const arr =[];
-        arr.push(saturationComment, passedComment, heartRateComment, mentalComment);
+        arr.push(weightComment, heartRateComment, mentalComment);
         console.log(arr)
         setComments(arr)
     },
@@ -95,19 +91,55 @@ const Results = () => {
         <Grid container direction="column" justifyContent="center">
           <Grid item sm={12} >
             <Typography color="primary" variant="h5">
-             Your recommendations are ready
+              {t("Your recommendations are ready")}
             </Typography>
           </Grid>
+          <Grid item sm={12} >
+            <Typography color="primary" variant="h6">
+              {t("Your parameters are below")}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <Typography variant="subtitle1" color="textSecondary">
+              {t("General")}: <strong>{data.general_p}</strong>
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <Typography variant="subtitle1" color="textSecondary">
+              {t("Anxiety")}: <strong>{data.anxiety_p}</strong>
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <Typography variant="subtitle1" color="textSecondary">
+              {t("Depression")}: <strong>{data.depression_p}</strong>
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <Typography variant="subtitle1" color="textSecondary">
+              {t("Happiness")}: <strong>{data.happiness_p}</strong>
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <Typography variant="subtitle1" color="textSecondary">
+              {t("Stress")}: <strong>{data.stress_p}</strong>
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <Typography variant="subtitle1" color="textSecondary">
+              {t("Recommendations")}: <strong>{commments[0] + " " + commments[1] + " " + commments[2]}</strong>
+            </Typography>
+          </Grid>
+
           <Grid item sm={12}>
           <Typography variant="subtitle1" color="textSecondary">
-           To download your results press the "Download" button
+            {t("To download your recommendations press the Download button")}
           </Typography>
         </Grid>
           <Grid className container alignItems="flex-start" spacing={1}>
 
             <Grid item sm={12}>
               <Button  className={classes.button} onClick={generatePDF} >
-               Download
+                {t("Download")}
               </Button>
             </Grid>
           </Grid>

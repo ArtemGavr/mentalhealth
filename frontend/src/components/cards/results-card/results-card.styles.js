@@ -7,7 +7,7 @@ export const useStyles = makeStyles({
     margin: "100px auto",
   },
   button: {
-    marginTop: 68,
+    marginTop: 10,
     backgroundColor: "#e3f2c4"
   },
   paramContainer: {
