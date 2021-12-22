@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">My App</string>
+    <string name="sign_in">Sign In</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="weop">Wrong email or password!</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="job_title">Job title</string>
+    <string name="successfully">Successfully!</string>
+    <string name="note">Diaries</string>
+    <string name="b_params">Body parameters</string>
+    <string name="profile">Profile</string>
+    <string name="test">Mood test</string>
+    <string name="logout">Logout</string>
+    <string name="en">English</string>
+    <string name="uk">Ukrainian</string>
+    <string name="update">Update</string>
+    <string name="save_note">Save note</string>
+    <string name="add">Add</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="stress_rate">Enter stress rate</string>
+    <string name="anxiety_rate">Enter anxiety rate</string>
+    <string name="dep_rate">Enter depression rate</string>
+    <string name="general_rate">Enter general rate</string>
+    <string name="happy_rate">Enter happiness rate</string>
+    <string name="send">Send</string>
+</resources>

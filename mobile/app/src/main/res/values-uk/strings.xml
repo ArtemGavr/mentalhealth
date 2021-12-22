@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">My App</string>
+    <string name="sign_in">Вхiд</string>
+    <string name="email">Пошта</string>
+    <string name="password">Пароль</string>
+    <string name="login">Увiйти</string>
+    <string name="register">Реестрацiя</string>
+    <string name="weop">Неправильна пошта або пароль!</string>
+    <string name="sign_up">Реестрацiя</string>
+    <string name="name">Iм\'я</string>
+    <string name="surname">Прiзвище</string>
+    <string name="job_title">Назва роботи</string>
+    <string name="successfully">Успiшно!</string>
+    <string name="note">Самозапис</string>
+    <string name="b_params">Параметри тiла</string>
+    <string name="profile">Профiль</string>
+    <string name="test">Тест на настрiй</string>
+    <string name="logout">Вихiд</string>
+    <string name="en">Англiйська</string>
+    <string name="uk">Украiнська</string>
+    <string name="update">Оновити</string>
+    <string name="save_note">Зберегти</string>
+    <string name="add">Додати</string>
+    <string name="height">Висота</string>
+    <string name="weight">Вага</string>
+    <string name="stress_rate">Введiть рейтинг стресу</string>
+    <string name="anxiety_rate">Введiть рейтинг тривоги</string>
+    <string name="dep_rate">Введiть рейтинг депресii</string>
+    <string name="general_rate">Введiть рейтинг загального стану</string>
+    <string name="happy_rate">Введiть рейтинг щастя</string>
+    <string name="send">Вiдправити</string>
+</resources>

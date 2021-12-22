@@ -2,10 +2,11 @@ const router = require("express").Router();
 const PatientParams = require("../../models/healthParams");
 
 const { permit } = require("../../middlewares/permition_roles");
+const patient = require("../../models/patient");
 //routes
 router.get("/last", permit(["patient"]), getLast);
 router.get("/", permit(["patient"]), read);
-router.post("/", permit(["patient"]), create);
+router.post("/:id",  create);
 router.delete("/:id", permit(["patient"]), del);
 
 /**
@@ -42,12 +43,13 @@ async function getLast(req, res) {
  */
 async function create(req, res) {
   try {
+    let patientID = req.params.id;
     let newParams = {};
     const { hr, temp } = req.body;
     newParams = { hr, temp };
-    newParams.patient = req.patient.id;
+    newParams.patient = patientID;
 
-    let foundPatient = req.patient;
+    let foundPatient = await patient.findById(patientID);
     foundPatient.healthParams.push(newParams);
     await foundPatient.save();
     res.json(PatientParams.format(newParams));

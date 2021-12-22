@@ -27,6 +27,6 @@ export const useStyles = makeStyles({
         },
     },
     appbar: {
-        backgroundColor: "#b3d2e6"
+        backgroundColor: "#5da1a1"
     }
 });

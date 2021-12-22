@@ -894,10 +894,17 @@
 
 /**
  * @swagger
- * /api/healthParams:
+ * /api/healthParams/{id}:
  *   post:
  *     summary: Create a new patient healthParams
  *     tags: [HealthParams]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The patient id
  *     requestBody:
  *       required: true
  *       content:
